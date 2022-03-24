@@ -1,5 +1,5 @@
 import React from 'react';
-import {gql, useQuery} from "@apollo/client";
+import {gql, useQuery, useMutation} from "@apollo/client";
 import './sample.css';
 import './addstyle.css'
 //
@@ -21,10 +21,26 @@ const GET_COURSES = gql`
     }
 }
 `;
+
+// Delete Course
+const DELETE_COURSE = gql`
+mutation DeleteCourse(
+    $_id:String!){
+        deleteCourse(id:$_id){
+        _id
+      }
+    }  
+`;
+
 //
 const CourseList = () => {
 
     const { loading, error, data , refetch } = useQuery(GET_COURSES);
+
+    const [deleteCourse] = useMutation(DELETE_COURSE);
+    const handleOnClickDelete = (_id)=> {
+        deleteCourse({ variables: { _id}});
+    }
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
@@ -49,7 +65,9 @@ const CourseList = () => {
                             <td>{course.firstName}</td>
                             <td>{course.lastName}</td>
                             <td>{course.program}</td>
-
+                            <td>
+                                <button class = "center" onClick={handleOnClickDelete(course._id)}>Remove</button>
+                            </td>
                         </tr>
                 ))}
              

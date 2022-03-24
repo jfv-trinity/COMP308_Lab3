@@ -31,7 +31,7 @@ const ADD_COURSE = gql`
 const AddCourse = () => {
 
     let code, name, section, semester, startingYear ;
-    const [AddCourse, { data, loading, error }] = useMutation(ADD_COURSE);
+    const [addCourse, { data, loading, error }] = useMutation(ADD_COURSE);
 
     if (loading) return 'Submitting...';
     if (error) return `Submission error! ${error.message}`;
@@ -41,7 +41,7 @@ const AddCourse = () => {
             <form
                 onSubmit={e => {    
                     e.preventDefault();
-                    AddCourse({ variables: { 
+                    addCourse({ variables: { 
                         code: code.value,
                         name: name.value,
                         section: section.value, 
