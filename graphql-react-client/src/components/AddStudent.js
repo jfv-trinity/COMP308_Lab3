@@ -36,7 +36,7 @@ const ADD_STUDENT = gql`
 
 const AddStudent = () => {
 
-    let password, firstName, lastName, address, email, program, startingYear ;
+    let password, firstName, lastName, address, number, email, program, startingYear ;
     const [addStudent, { data, loading, error }] = useMutation(ADD_STUDENT);
 
     if (loading) return 'Submitting...';
@@ -52,6 +52,7 @@ const AddStudent = () => {
                         firstName: firstName.value,
                         lastName: lastName.value, 
                         address: address.value,
+                        number: number.value,
                         email: email.value,
                         program: program.value,
                         startingYear: parseInt(startingYear.value) 
@@ -61,6 +62,7 @@ const AddStudent = () => {
                     firstName.value = '';
                     lastName.value = '';
                     address.value = '';
+                    number.value = '';
                     email.value='';
                     program.value='';
                     startingYear.value='';
@@ -73,35 +75,42 @@ const AddStudent = () => {
                         <b>Password:</b>
                     </label>
                     <input type="text" class="fields" name="password" ref={node => {password = node; }} 
-                    placeholder="Enter password:" />
+                    placeholder="Enter password" />
                 </div>
                 <div class="container">
                     <label>
                         <b>First Name:</b>
                     </label>
                     <input type="text" class="fields" name="firstName" ref={node => {firstName = node; }} 
-                    placeholder="First Name:" />
+                    placeholder="Enter First Name" />
                 </div>
                 <div class="container">
                     <label>
                         <b>Last Name:</b>
                     </label>
                     <input type="text" class="fields" name="lastName" ref={node => {lastName = node; }}
-                    placeholder="Last Name:" />
+                    placeholder="Enter Last Name" />
                 </div>
                 <div class="container">
                     <label>
                         <b>Address:</b>
                     </label>
                     <input type="text" class="fields" name="address" ref={node => {address = node; }}
-                    placeholder="Address:" />
+                    placeholder="Enter Address" />
+                    </div>
+                <div class="container">
+                    <label>
+                        <b>Number:</b>
+                    </label>
+                    <input type="text" class="fields" name="number" ref={node => {number = node; }}
+                    placeholder="Enter Phone number" />
                 </div>
                 <div class="container">
                     <label>
                         <b>Email:</b>
                     </label>
                     <input type="text" class="fields" name="email" ref={node => {email = node; }}
-                    placeholder="Email:" />
+                    placeholder="Enter Email" />
                 </div>
                 
                 <div class="container">
@@ -109,7 +118,7 @@ const AddStudent = () => {
                         <b>Program:</b>
                     </label>
                     <input type="text" class="fields" name="program" ref={node => {program = node; }}
-                    placeholder="Program:" />
+                    placeholder="Enter Program" />
                 </div>
 
                 <div class="container">
@@ -117,7 +126,7 @@ const AddStudent = () => {
                         <b>Starting Year:</b>
                     </label>
                     <input type="text" class="fields" name="startingYear" ref={node => {startingYear = node; }}
-                    placeholder="Starting Year:" />
+                    placeholder="Enter Starting Year" />
                 </div>
 
                 <div class="container">
