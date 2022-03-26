@@ -90,15 +90,17 @@ const StudentList = () => {
     return(
     
         <div>
-            <table cellPadding={5} >
+            <table cellPadding={5}>
+            <tbody>
                 <tr>
-                        <th>_id</th>
-                        <th>email</th>
-                        <th>firstName</th>
-                        <th>lastName</th>
-                        <th>program</th>
-
+                    <th>id</th>
+                    <th>email</th>
+                    <th>firstName</th>
+                    <th>lastName</th>
+                    <th>program</th>
                 </tr>
+                </tbody>
+                <tbody>
                 {data.students.map((student, index) => (
                         <tr key={index}>
                             <td>{student._id}</td>
@@ -107,22 +109,20 @@ const StudentList = () => {
                             <td>{student.lastName}</td>
                             <td>{student.program}</td>
                             <td>
-                                <button class = "center" onClick={handleOnClickDelete(student._id)}>Remove</button>
+                            <button onClick={handleOnClickDelete(student._id)}>Remove</button>
                             </td>
                             <td>
-                                <button class = "center">Edit</button>
+                            <button>Edit</button>
                             </td>
                         </tr>
                 ))}
-             
+             </tbody>
             </table>
-            <div class="center">
-                <button class = "center" onClick={() => refetch()}>Refetch</button>
+            <div className='center'>
+                <button onClick={() => refetch()}>Refetch</button>
             </div>
-            
         </div>
     );
 }
-
 export default StudentList
 

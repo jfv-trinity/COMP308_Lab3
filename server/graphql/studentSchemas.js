@@ -114,7 +114,7 @@ const studentType = new GraphQLObjectType({
             return courses
           }
         },
-        student: {
+        course: {
           type: courseType,
           args: {
             id: {

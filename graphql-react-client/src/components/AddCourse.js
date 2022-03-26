@@ -44,7 +44,7 @@ const AddCourse = () => {
                     addCourse({ variables: { 
                         code: code.value,
                         name: name.value,
-                        section: section.value, 
+                        section: parseInt(section.value), 
                         semester: semester.value,
                         startingYear: parseInt(startingYear.value) 
                       } });

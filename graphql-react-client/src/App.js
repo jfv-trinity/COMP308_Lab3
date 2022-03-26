@@ -1,10 +1,8 @@
 import './App.css';
 //
 import React from 'react';
-import {BrowserRouter as Router,Switch,Route,Routes,Link,Redirect} from "react-router-dom";
+import {BrowserRouter as Router,Route,Routes,Link} from "react-router-dom";
 //
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
 import './App.css';
 //
 import StudentList from './components/StudentList';

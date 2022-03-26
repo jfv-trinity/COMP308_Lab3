@@ -12,6 +12,7 @@ import './addstyle.css'
 const GET_COURSES = gql`
 {
     courses{
+      _id
       code
       name
       section
@@ -32,6 +33,32 @@ mutation DeleteCourse(
     }  
 `;
 
+// Change to update course
+const UPDATE_COURSE = gql`
+mutation UpdateCourse(
+    $id: String!
+    $code: String!,
+    $name: String!,
+    $section: Int!,
+    $semester: String!,
+    $startingYear: Int! ) 
+    
+    {
+    updateCourse(id: $id, code:$code, name:$name,section:$section,
+      semester:$semester, startingYear:$startingYear) {
+      ... courseFields
+    }
+  }
+  fragment courseFields on course{
+    _id
+    code
+    name
+    section
+    semester
+    startingYear
+  }
+`;
+
 //
 const CourseList = () => {
 
@@ -42,39 +69,51 @@ const CourseList = () => {
         deleteCourse({ variables: { _id}});
     }
 
+    const [editCourse] = useMutation(UPDATE_COURSE);
+    const handleOnClickEdit = (_id)=> {
+        editCourse({ variables: { _id}});
+    }
+
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 
     return (
 
         <div>
-            
-            <table >
+            <table cellPadding={5}>
+                <tbody>
                 <tr>
-                        <th>code</th>
-                        <th>name</th>
-                        <th>section</th>
-                        <th>semester</th>
-                        <th>startingYear</th>
-
+                    <th>id</th>
+                    <th>code</th>
+                    <th>name</th>
+                    <th>section</th>
+                    <th>semester</th>
+                    <th>startingYear</th>
                 </tr>
+                </tbody>
                 {data.courses.map((course, index) => (
+                    <tbody>
                         <tr key={index}>
                             <td>{course._id}</td>
-                            <td>{course.email}</td>
-                            <td>{course.firstName}</td>
-                            <td>{course.lastName}</td>
-                            <td>{course.program}</td>
+                            <td>{course.code}</td>
+                            <td>{course.name}</td>
+                            <td>{course.section}</td>
+                            <td>{course.semester}</td>
+                            <td>{course.startingYear}</td>
                             <td>
-                                <button class = "center" onClick={handleOnClickDelete(course._id)}>Remove</button>
+                                <button onClick={handleOnClickDelete(course._id)}>Remove</button>
+                            </td>
+                            <td>
+                                <button className='center'>Edit</button>
                             </td>
                         </tr>
+                    </tbody>
                 ))}
-             
+
             </table>
             
-            <div class="center">
-                <button class = "center" onClick={() => refetch()}>Refetch</button>
+            <div className="center">
+                <button className="center" onClick={() => refetch()}>Refetch</button>
             </div>
             
         </div>
