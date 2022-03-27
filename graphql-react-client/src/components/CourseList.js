@@ -46,16 +46,13 @@ mutation UpdateCourse(
     {
     updateCourse(id: $id, code:$code, name:$name,section:$section,
       semester:$semester, startingYear:$startingYear) {
-      ... courseFields
+        _id
+        code
+        name
+        section
+        semester
+        startingYear
     }
-  }
-  fragment courseFields on course{
-    _id
-    code
-    name
-    section
-    semester
-    startingYear
   }
 `;
 

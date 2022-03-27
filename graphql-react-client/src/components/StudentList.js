@@ -51,19 +51,16 @@ mutation UpdateStudent(
     {
     updateStudent(id: $id, firstName:$firstName, lastName:$lastName,password:$password,
       address:$address,number:$number, email:$email,program: $program, startingYear:$startingYear) {
-      ... studentFields
+        _id,
+        firstName
+        lastName
+        password
+        Address
+        number
+        email
+        program
+        startingYear
     }
-  }
-  fragment studentFields on student{
-    _id
-    firstName
-    lastName
-    password
-    Address
-    number
-    email
-    program
-    startingYear
   }
 `;
 
